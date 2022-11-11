@@ -11,14 +11,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     @IBOutlet weak var myTableView: UITableView!
-    @IBOutlet weak var button: UIButton!
     
     var people = [Result]()
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.delegate = self
         myTableView.dataSource = self
-        getData()
+        let url = URL(string: "https://swapi.dev/api/people/")
+//        var api = ApiHandler()
+        getData(url: url!)
 //        self.myTableView.reloadData()
 
 
@@ -26,35 +27,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
     }
     
+    func getData(url: URL) {
+     //GET request
+     var request = URLRequest(url: url)
+//     let temp = ViewController()
+        
+     request.httpMethod = "GET"
+     
+     let task = URLSession.shared.dataTask(with: request) {
+         data, response, error in
+         if let data = data {
+             let decoder = JSONDecoder()
+             do {
+                   let parsedData = try? decoder.decode(Starwar.self, from: data)
+                   self.people = (parsedData!.results!)
+                   print("Parsed Data: \(parsedData!.results!)")
+                 DispatchQueue.main.async
+                 {
+                     self.myTableView.reloadData()
+                 }
+             }
+             catch {
+                 print(error.localizedDescription)
+             }
+         }
+     }
+     task.resume()
+     
+ }
     
     
-    func getData() {
-        guard let url = URL(string: "https://swapi.dev/api/people/")
-        else
-        {
-            return
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailsVC" {
+            var detailsVC = segue.destination as! DetailsViewController
+            let cell = sender as! MyTableViewCell
+            let indexPath = myTableView.indexPath(for: cell)
+            detailsVC.film = people[indexPath!.row].films!
+            detailsVC.name = people[indexPath!.row].name!
         }
-        //GET request
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: request) {
-            data, response, error in
-            if let data = data {
-                let decoder = JSONDecoder()
-                do {
-                    let parsedData = try? decoder.decode(Starwar.self, from: data)
-                    self.people = (parsedData!.results!)
-                    print("Parsed Data: \(parsedData!.results!)")
-                   
-                }
-                catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        task.resume()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,14 +79,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.homeWorldLabel.text = people[indexPath.row].homeworld
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
     
-    @IBAction func buttonTapped(_ sender: Any) {
-        self.myTableView.reloadData()
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//       self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath.row)
+//    }
 }
 
 
