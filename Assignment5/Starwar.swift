@@ -24,6 +24,26 @@ struct Result: Codable {
     let url: String?
 }
 
+struct Homeworld: Codable {
+    let name, rotation_period, orbital_period, diameter: String?
+    let climate, gravity, terrain, surface_water: String?
+    let population: String?
+    let residents, films: [String]?
+    let created, edited: String?
+    let url: String?
+}
+
+class Film: Codable {
+    let title: String?
+    let episode_id: Int?
+    let opening_crawl, director, producer, release_date: String?
+    let characters, planets, starships, vehicles: [String]?
+    let species: [String]?
+    let created, edited: String?
+    let url: String?
+}
+
+
 enum Gender: String, Codable {
     case female = "female"
     case male = "male"

@@ -11,7 +11,9 @@ class ApiHandler {
     func getData(url: URL) {
      //GET request
      var request = URLRequest(url: url)
-     let temp = ViewController()
+        
+    let temp = ViewController()
+
         
      request.httpMethod = "GET"
      
@@ -20,9 +22,9 @@ class ApiHandler {
          if let data = data {
              let decoder = JSONDecoder()
              do {
-                   let parsedData = try? decoder.decode(Starwar.self, from: data)
-                   temp.people = (parsedData!.results!)
-                   print("Parsed Data: \(parsedData!.results!)")
+                   let parsedData = try? decoder.decode(Homeworld.self, from: data)
+                   temp.homeworldName.append(parsedData!.name!)
+                   print("Parsed Data: \(parsedData!.name!)")
 //                 DispatchQueue.main.async
 //                 {
 //                     self.myTableView.reloadData()
