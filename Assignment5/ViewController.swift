@@ -48,8 +48,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //     let temp = ViewController()
         
         request.httpMethod = "GET"
-        let q = DispatchQueue(label: "race_fixer")
-        let group = DispatchGroup()
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             if let data = data {
@@ -99,6 +97,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if self.homeworldName.count == 10 {
                         DispatchQueue.main.async {
                             self.myTableView.reloadData()
+//                            self.homeworldName.removeAll()
                         }
                     }
                 }
