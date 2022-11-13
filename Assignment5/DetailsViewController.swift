@@ -15,7 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var eyeColorLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var film = [String]()
+    var films = [String]()
     var name : String = ""
     var eyeColor : String = ""
     var hairColor : String = ""
@@ -29,7 +29,7 @@ class DetailsViewController: UIViewController {
         eyeColorLabel.text = eyeColor
         homeworldLabel.text = homeworld
         
-        for i in film {
+        for i in films {
             let url = URL(string: i)
             getData(url: url!)
             
@@ -50,7 +50,6 @@ class DetailsViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.filmsLabel.text! += ("\n" + parsedData!.title!)
                         }
-                        
                     }
                     catch {
                         print(error.localizedDescription)

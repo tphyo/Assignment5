@@ -11,10 +11,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var myTableView: UITableView!
     
+    @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
     var people = [Result]()
-    var homeworldLink = [Result]()
-//    var homeworldName = [String]()
-//    var name : String = ""
     var urls = [String]()
     var homeworld = [(String, String)]()
     var nextUrl : String?
@@ -28,22 +26,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.delegate = self
         myTableView.dataSource = self
         
-        let url1 = URL(string: "https://swapi.dev/api/people/")
-        self.getData(url: url1!)
-//        let api = ApiHandler()
-//        let first = api.getData(url: url1!, model: "Starwar")
-//        self.people = first.results as! [Result]
-        
-//        let next = URL(string: people.)
-        
-        
+        let url = URL(string: "https://swapi.dev/api/people/")
+        self.getData(url: url!)
     }
     
     
     func getData(url: URL) {
         //GET request
         var request = URLRequest(url: url)
-        //     let temp = ViewController()
         
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) {
@@ -51,14 +41,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let data = data {
                 let decoder = JSONDecoder()
                 do {
-                    
-                    sleep(2)
                     let parsedData = try? decoder.decode(Starwar.self, from: data)
                     self.people += parsedData!.results!
-                    self.homeworldLink += parsedData!.results!
                     self.nextUrl = parsedData!.next
                     
-                    for i in self.homeworldLink {
+                    for i in self.people {
                         self.urls.append(i.homeworld!)
                         
                     }
@@ -88,12 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let decoder = JSONDecoder()
                 do {
                     let parsedData = try? decoder.decode(Homeworld.self, from: data)
-                    
-//                    self.name = parsedData!.name!
-//
-//                    self.homeworldName.append(self.name)
-                    
-                    self.homeworld.append((parsedData!.url!, parsedData!.name!))
+                    self.homeworld.append((parsedData!.url!, parsedData!.name ?? ""))
                     
                     //To wait for filling data to array
                     if self.homeworld.count % 10 == 0 {
@@ -116,7 +98,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let detailsVC = segue.destination as! DetailsViewController
             let cell = sender as! MyTableViewCell
             let indexPath = myTableView.indexPath(for: cell)
-            detailsVC.film = people[indexPath!.row].films!
+            detailsVC.films = people[indexPath!.row].films!
             detailsVC.name = people[indexPath!.row].name!
             detailsVC.eyeColor = people[indexPath!.row].eye_color!
             detailsVC.hairColor = people[indexPath!.row].hair_color!
@@ -147,8 +129,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //initiate paginiation
         if indexPath.item == people.count - 1 {
-            print("fetch more data")
+            myActivityIndicator.isHidden = false
+            myActivityIndicator.startAnimating()
             getData(url: URL(string: nextUrl!)!)
+
+        }
+        else {
+            myActivityIndicator.stopAnimating()
+            myActivityIndicator.isHidden = true
         }
         return cell
     }
