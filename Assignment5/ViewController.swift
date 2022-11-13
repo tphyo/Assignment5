@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var urls = [String]()
     var homeworld = [(String, String)]()
     var nextUrl : String?
+    var isPaginating = false
     
     
     
@@ -43,7 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 do {
                     let parsedData = try? decoder.decode(Starwar.self, from: data)
                     self.people += parsedData!.results!
-                    self.nextUrl = parsedData!.next
+                    self.nextUrl = parsedData!.next ?? ""
                     
                     for i in self.people {
                         self.urls.append(i.homeworld!)
@@ -82,6 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         DispatchQueue.main.async {
                             self.myTableView.reloadData()
                         }
+                        self.isPaginating = false
                     }
                 }
                 catch {
@@ -115,6 +117,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return people.count
     }
     
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! MyTableViewCell
         cell.characterLabel.text = people[indexPath.row].name
@@ -128,7 +131,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         //initiate paginiation
-        if indexPath.item == people.count - 1 {
+        if indexPath.item == people.count - 1 && !isPaginating{
+            isPaginating = true
             myActivityIndicator.isHidden = false
             myActivityIndicator.startAnimating()
             getData(url: URL(string: nextUrl!)!)
@@ -138,6 +142,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             myActivityIndicator.stopAnimating()
             myActivityIndicator.isHidden = true
         }
+//        self.isPaginating = false
         return cell
     }
     
