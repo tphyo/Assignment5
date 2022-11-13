@@ -17,7 +17,7 @@ struct Starwar: Codable {
 struct Result: Codable {
     let name, height, mass, hair_color: String?
     let skin_color, eye_color, birth_year: String?
-    let gender: Gender?
+    let gender: String?
     let homeworld: String?
     let films, species, vehicles, starships: [String]?
     let created, edited: String?
@@ -44,11 +44,6 @@ class Film: Codable {
 }
 
 
-enum Gender: String, Codable {
-    case female = "female"
-    case male = "male"
-    case nA = "n/a"
-}
 
 // MARK: - Encode/decode helpers
 

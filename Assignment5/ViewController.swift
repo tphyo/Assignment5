@@ -29,7 +29,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let url1 = URL(string: "https://swapi.dev/api/people/")
         self.getData(url: url1!)
-        
+        //        let api = ApiHandler()
+        //        let first = api.getData(url: url1!, model: "Starwar")
+        //        self.people = first.results! as! [Result]
         
         //        let url1 = URL(string: homeworldLink)
         //        getData1(url: url!)
@@ -59,33 +61,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     for i in self.homeworldLink {
                         self.urls.append(i.homeworld!)
-                        //                        group.leave()
-                        //                        let temp = ApiHandler()
-                        
+
                     }
-                    
-                    DispatchQueue.global(qos: .default).async {
-                        for j in self.urls {
-                            group.enter()
-                            q.sync {
-                                self.getData1(url: URL(string: j)!)
-                                group.leave()
-                            }
-                            
-                            
-                            group.wait()
-                        }
-                        group.notify(queue: .main) {
-                            print("Finished")
-                            //                        print(self.homeworldName)
-                        }
+
+                    for j in self.urls {
+                        self.getData1(url: URL(string: j)!)
                     }
-                    
-                    //                    print("Parsed Data: \(parsedData!.results!)")
-                    //                    DispatchQueue.main.async {
-                    //                        self.myTableView.reloadData()
-                    //                    }
-                    
                 }
                 catch {
                     print(error.localizedDescription)
@@ -97,11 +78,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func getData1(url: URL) {
-        let q = DispatchQueue(label: "race_fixer")
         //GET request
         var request = URLRequest(url: url)
         let group = DispatchGroup()
-        //     let temp = ViewController()
         
         request.httpMethod = "GET"
         
@@ -114,28 +93,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     self.name = parsedData!.name!
                     
-                        self.homeworldName.append(self.name)
-
+                    self.homeworldName.append(self.name)
                     
-                    
-                    //                    print("Parsed Data: \(parsedData!.name)")
-                    
-                    //                    DispatchQueue.main.async {
-                    //                        self.myTableView.reloadData()
-                    //                    }
+                    //To wait for filling data to array
+                    if self.homeworldName.count == 10 {
+                        DispatchQueue.main.async {
+                            self.myTableView.reloadData()
+                        }
+                    }
                 }
                 catch {
                     print(error.localizedDescription)
                 }
-                
             }
-            
-            
         }
-        
         task.resume()
-        
-        
     }
     
     
@@ -146,6 +118,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let indexPath = myTableView.indexPath(for: cell)
             detailsVC.film = people[indexPath!.row].films!
             detailsVC.name = people[indexPath!.row].name!
+            detailsVC.eyeColor = people[indexPath!.row].eye_color!
+            detailsVC.hairColor = people[indexPath!.row].hair_color!
+            detailsVC.homeworld = homeworldName[indexPath!.row]
+            
         }
     }
     
@@ -158,9 +134,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.characterLabel.text = people[indexPath.row].name
         cell.eyeColorLabel.text = people[indexPath.row].eye_color
         cell.hairColorLabel.text = people[indexPath.row].hair_color
-        //        let url = URL(string: people[indexPath.row].homeworld!)
-        //        getData1(url: url!)
-        
         cell.homeWorldLabel.text = homeworldName[indexPath.row]
         return cell
     }
@@ -173,9 +146,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.myTableView.reloadData()
         
     }
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //       self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath.row)
-    //    }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+           self.performSegue(withIdentifier: "ShowDetailsVC", sender: self)
+        }
 }
 
 

@@ -10,31 +10,35 @@ import UIKit
 class DetailsViewController: UIViewController {
     @IBOutlet weak var filmsLabel: UILabel!
     
+    @IBOutlet weak var homeworldLabel: UILabel!
+    @IBOutlet weak var hairColorLabel: UILabel!
+    @IBOutlet weak var eyeColorLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     var film = [String]()
     var name : String = ""
-
+    var eyeColor : String = ""
+    var hairColor : String = ""
+    var homeworld : String = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = name
+        hairColorLabel.text = hairColor
+        eyeColorLabel.text = eyeColor
+        homeworldLabel.text = homeworld
         for i in film {
-//            print(i)
+            //            print(i)
             let url = URL(string: i)
             getData(url: url!)
             
             
         }
-//        for i in filmName {
-//            filmsLabel.text = ("\n" + i.title)
-//        }
         
         
         func getData(url: URL) {
             //GET request
             var request = URLRequest(url: url)
-            //     let temp = ViewController()
-            
             request.httpMethod = "GET"
             
             let task = URLSession.shared.dataTask(with: request) {
@@ -69,8 +73,5 @@ class DetailsViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    @IBAction func ButtonTapped(_ sender: Any) {
-        
-    }
     
 }
