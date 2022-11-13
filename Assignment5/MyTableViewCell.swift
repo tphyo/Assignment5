@@ -8,11 +8,10 @@
 import UIKit
 
 class MyTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var characterLabel: UILabel!
     
     @IBOutlet weak var eyeColorLabel: UILabel!
-    
     
     @IBOutlet weak var hairColorLabel: UILabel!
     
@@ -22,13 +21,13 @@ class MyTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
     
     
     
