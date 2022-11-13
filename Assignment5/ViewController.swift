@@ -13,10 +13,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var people = [Result]()
     var homeworldLink = [Result]()
-    var homeworldName = [String]()
-    var name : String = ""
+//    var homeworldName = [String]()
+//    var name : String = ""
     var urls = [String]()
     var homeworld = [(String, String)]()
+    var nextUrl : String?
     
     
     
@@ -29,14 +30,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let url1 = URL(string: "https://swapi.dev/api/people/")
         self.getData(url: url1!)
-        //        let api = ApiHandler()
-        //        let first = api.getData(url: url1!, model: "Starwar")
-        //        self.people = first.results! as! [Result]
+//        let api = ApiHandler()
+//        let first = api.getData(url: url1!, model: "Starwar")
+//        self.people = first.results as! [Result]
         
-        //        let url1 = URL(string: homeworldLink)
-        //        getData1(url: url!)
-        
-        
+//        let next = URL(string: people.)
         
         
     }
@@ -53,15 +51,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let data = data {
                 let decoder = JSONDecoder()
                 do {
+                    
+                    sleep(2)
                     let parsedData = try? decoder.decode(Starwar.self, from: data)
-                    self.people = parsedData!.results!
-                    self.homeworldLink = parsedData!.results!
+                    self.people += parsedData!.results!
+                    self.homeworldLink += parsedData!.results!
+                    self.nextUrl = parsedData!.next
                     
                     for i in self.homeworldLink {
                         self.urls.append(i.homeworld!)
-
+                        
                     }
-
+                    
                     for j in self.urls {
                         self.getHomeworldName(url: URL(string: j)!)
                     }
@@ -88,14 +89,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 do {
                     let parsedData = try? decoder.decode(Homeworld.self, from: data)
                     
-                    self.name = parsedData!.name!
-                    
-                    self.homeworldName.append(self.name)
+//                    self.name = parsedData!.name!
+//
+//                    self.homeworldName.append(self.name)
                     
                     self.homeworld.append((parsedData!.url!, parsedData!.name!))
                     
                     //To wait for filling data to array
-                    if self.homeworldName.count == 10 {
+                    if self.homeworld.count % 10 == 0 {
                         DispatchQueue.main.async {
                             self.myTableView.reloadData()
                         }
@@ -119,10 +120,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             detailsVC.name = people[indexPath!.row].name!
             detailsVC.eyeColor = people[indexPath!.row].eye_color!
             detailsVC.hairColor = people[indexPath!.row].hair_color!
-//            detailsVC.homeworld = homeworldName[indexPath!.row]
-            for (i,j) in homeworld {
-                if i == people[indexPath!.row].homeworld {
-                    detailsVC.homeworld = j
+            for (url, place) in homeworld {
+                if url == people[indexPath!.row].homeworld {
+                    detailsVC.homeworld = place
                 }
             }
             
@@ -139,12 +139,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.eyeColorLabel.text = people[indexPath.row].eye_color
         cell.hairColorLabel.text = people[indexPath.row].hair_color
         
-        for (i,j) in homeworld {
-            if i == people[indexPath.row].homeworld {
-                cell.homeWorldLabel.text = j
+        for (url, place) in homeworld {
+            if url == people[indexPath.row].homeworld {
+                cell.homeWorldLabel.text = place
             }
         }
-//        cell.homeWorldLabel.text = homeworldName[indexPath.row]
+        
+        //initiate paginiation
+        if indexPath.item == people.count - 1 {
+            print("fetch more data")
+            getData(url: URL(string: nextUrl!)!)
+        }
         return cell
     }
     
@@ -152,13 +157,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 150
     }
     
-    @IBAction func ButtonTapped(_ sender: Any) {
-        self.myTableView.reloadData()
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //            self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath.row)
     }
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath.row)
-        }
 }
 
 

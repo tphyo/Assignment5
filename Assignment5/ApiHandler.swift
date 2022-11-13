@@ -12,10 +12,8 @@ class ApiHandler {
         //GET request
         var request = URLRequest(url: url)
         
-        let temp = ViewController()
         request.httpMethod = "GET"
-        var parsedJSON : AnyObject!
-        var parsedData : AnyObject!
+        var parsedData : AnyObject?
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
             if let data = data {
@@ -38,25 +36,14 @@ class ApiHandler {
                     {
                         parsedData = try? decoder.decode(Film.self, from: data) as AnyObject
                     }
-                    //                   temp.homeworldName.append(parsedData!.name!)
-                    parsedJSON = parsedData
-                    
-                    //                   print("Parsed Data: \(parsedData!.name!)")
-                    //                 DispatchQueue.main.async
-                    //                 {
-                    //                     self.myTableView.reloadData()
-                    //                 }
-                    
                 }
                 catch {
                     print(error.localizedDescription)
                 }
-                
-                
             }
         }
         task.resume()
-        return parsedJSON
+        return parsedData!
         
     }
     
