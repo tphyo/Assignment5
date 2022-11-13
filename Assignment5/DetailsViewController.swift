@@ -15,6 +15,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var eyeColorLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
+    var filmsURL = [String]()
     var films = [String]()
     var name : String = ""
     var eyeColor : String = ""
@@ -22,19 +24,22 @@ class DetailsViewController: UIViewController {
     var homeworld : String = ""
     
     override func viewDidLoad() {
+        myActivityIndicator.isHidden = false
+        self.myActivityIndicator.startAnimating()
         super.viewDidLoad()
+
         
         nameLabel.text = name
         hairColorLabel.text = hairColor
         eyeColorLabel.text = eyeColor
         homeworldLabel.text = homeworld
         
-        for i in films {
+        for i in filmsURL {
             let url = URL(string: i)
             getData(url: url!)
-            
-            
         }
+        
+//        setData(titles: films)
         
         func getData(url: URL) {
             //GET request
@@ -43,12 +48,20 @@ class DetailsViewController: UIViewController {
             
             let task = URLSession.shared.dataTask(with: request) {
                 data, response, error in
+                DispatchQueue.main.async {
+
+                }
                 if let data = data {
                     let decoder = JSONDecoder()
                     do {
                         let parsedData = try? decoder.decode(Film.self, from: data)
                         DispatchQueue.main.async {
-                            self.filmsLabel.text! += ("\n" + parsedData!.title!)
+                            self.filmsLabel.text! += "\n" + (parsedData!.title!)
+                            DispatchQueue.main.async {
+                                self.myActivityIndicator.stopAnimating()
+                                self.myActivityIndicator.isHidden = true
+                            }
+                            
                         }
                     }
                     catch {
@@ -62,7 +75,11 @@ class DetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    func setData(titles: [String]) {
+        for i in titles {
+            self.filmsLabel.text! += ("\n" + i)
+        }
+    }
     /*
      // MARK: - Navigation
      

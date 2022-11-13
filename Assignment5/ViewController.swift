@@ -17,8 +17,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var homeworld = [(String, String)]()
     var nextUrl : String?
     var isPaginating = false
-    //    var api = ApiHandler()
-    
     
     override func viewDidLoad() {
         
@@ -99,7 +97,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let detailsVC = segue.destination as! DetailsViewController
             let cell = sender as! MyTableViewCell
             let indexPath = myTableView.indexPath(for: cell)
-            detailsVC.films = people[indexPath!.row].films!
+            detailsVC.filmsURL = people[indexPath!.row].films!
             detailsVC.name = people[indexPath!.row].name!
             detailsVC.eyeColor = people[indexPath!.row].eye_color!
             detailsVC.hairColor = people[indexPath!.row].hair_color!

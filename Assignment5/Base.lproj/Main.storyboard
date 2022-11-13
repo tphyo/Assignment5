@@ -200,6 +200,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="JVo-rU-PPW">
+                                <rect key="frame" x="9" y="292" width="361" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OWc-g4-wvi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -210,6 +214,7 @@
                         <outlet property="filmsLabel" destination="sBM-FQ-TLd" id="MYR-MX-Hpi"/>
                         <outlet property="hairColorLabel" destination="0aR-DN-498" id="7JM-Gm-Xgu"/>
                         <outlet property="homeworldLabel" destination="eoj-VH-mb8" id="TpJ-lU-dhn"/>
+                        <outlet property="myActivityIndicator" destination="JVo-rU-PPW" id="Tmn-Wi-nt4"/>
                         <outlet property="nameLabel" destination="FoM-78-wKc" id="epe-cK-set"/>
                     </connections>
                 </viewController>
