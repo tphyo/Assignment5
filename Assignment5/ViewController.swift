@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var homeworld = [(String, String)]()
     var nextUrl : String?
     var isPaginating = false
-    
+    //    var api = ApiHandler()
     
     
     override func viewDidLoad() {
@@ -28,14 +28,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.dataSource = self
         
         let url = URL(string: "https://swapi.dev/api/people/")
-        self.getData(url: url!)
+        
+        getData(url: url!)
+        
     }
     
     
     func getData(url: URL) {
         //GET request
         var request = URLRequest(url: url)
-        
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
@@ -48,7 +49,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     for i in self.people {
                         self.urls.append(i.homeworld!)
-                        
                     }
                     
                     for j in self.urls {
@@ -67,7 +67,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func getHomeworldName(url: URL) {
         //GET request
         var request = URLRequest(url: url)
-        
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) {
@@ -76,7 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let decoder = JSONDecoder()
                 do {
                     let parsedData = try? decoder.decode(Homeworld.self, from: data)
-                    self.homeworld.append((parsedData!.url!, parsedData!.name ?? ""))
+                    self.homeworld.append((parsedData!.url!, parsedData!.name ?? "none"))
                     
                     //To wait for filling data to array
                     if self.homeworld.count % 10 == 0 {
@@ -117,7 +116,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return people.count
     }
     
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! MyTableViewCell
         cell.characterLabel.text = people[indexPath.row].name
@@ -136,13 +135,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             myActivityIndicator.isHidden = false
             myActivityIndicator.startAnimating()
             getData(url: URL(string: nextUrl!)!)
-
+            
         }
         else {
             myActivityIndicator.stopAnimating()
             myActivityIndicator.isHidden = true
         }
-//        self.isPaginating = false
+        //        self.isPaginating = false
         return cell
     }
     
