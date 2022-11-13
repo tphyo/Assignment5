@@ -63,7 +63,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
 
                     for j in self.urls {
-                        self.getData1(url: URL(string: j)!)
+                        self.getHomeworldName(url: URL(string: j)!)
                     }
                 }
                 catch {
@@ -75,10 +75,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func getData1(url: URL) {
+    func getHomeworldName(url: URL) {
         //GET request
         var request = URLRequest(url: url)
-        let group = DispatchGroup()
         
         request.httpMethod = "GET"
         
@@ -93,11 +92,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     self.homeworldName.append(self.name)
                     
+                    self.homeworld.append((parsedData!.url!, parsedData!.name!))
+                    
                     //To wait for filling data to array
                     if self.homeworldName.count == 10 {
                         DispatchQueue.main.async {
                             self.myTableView.reloadData()
-//                            self.homeworldName.removeAll()
                         }
                     }
                 }
@@ -119,7 +119,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             detailsVC.name = people[indexPath!.row].name!
             detailsVC.eyeColor = people[indexPath!.row].eye_color!
             detailsVC.hairColor = people[indexPath!.row].hair_color!
-            detailsVC.homeworld = homeworldName[indexPath!.row]
+//            detailsVC.homeworld = homeworldName[indexPath!.row]
+            for (i,j) in homeworld {
+                if i == people[indexPath!.row].homeworld {
+                    detailsVC.homeworld = j
+                }
+            }
             
         }
     }
@@ -133,7 +138,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.characterLabel.text = people[indexPath.row].name
         cell.eyeColorLabel.text = people[indexPath.row].eye_color
         cell.hairColorLabel.text = people[indexPath.row].hair_color
-        cell.homeWorldLabel.text = homeworldName[indexPath.row]
+        
+        for (i,j) in homeworld {
+            if i == people[indexPath.row].homeworld {
+                cell.homeWorldLabel.text = j
+            }
+        }
+//        cell.homeWorldLabel.text = homeworldName[indexPath.row]
         return cell
     }
     
@@ -146,7 +157,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           self.performSegue(withIdentifier: "ShowDetailsVC", sender: self)
+//            self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath.row)
         }
 }
 
