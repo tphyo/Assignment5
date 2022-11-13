@@ -17,8 +17,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var homeworld = [(String, String)]()
     var nextUrl : String?
     var isPaginating = false
+    var isDonePaginating = false
     
     override func viewDidLoad() {
+        myActivityIndicator.startAnimating()
         
         super.viewDidLoad()
         
@@ -132,6 +134,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             isPaginating = true
             myActivityIndicator.isHidden = false
             myActivityIndicator.startAnimating()
+            if people.count == 0 {
+                self.isDonePaginating = true
+            }
             getData(url: URL(string: nextUrl!)!)
             
         }
@@ -144,7 +149,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        let height : CGFloat = isDonePaginating ? 0 : 90
+        return height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

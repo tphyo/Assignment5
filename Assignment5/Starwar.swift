@@ -33,7 +33,7 @@ struct Homeworld: Codable {
     let url: String?
 }
 
-class Film: Codable {
+struct Film: Codable {
     let title: String?
     let episode_id: Int?
     let opening_crawl, director, producer, release_date: String?

@@ -22,12 +22,13 @@ class DetailsViewController: UIViewController {
     var eyeColor : String = ""
     var hairColor : String = ""
     var homeworld : String = ""
+    var titles = [String]()
+    
     
     override func viewDidLoad() {
         myActivityIndicator.isHidden = false
         self.myActivityIndicator.startAnimating()
         super.viewDidLoad()
-
         
         nameLabel.text = name
         hairColorLabel.text = hairColor
@@ -39,7 +40,7 @@ class DetailsViewController: UIViewController {
             getData(url: url!)
         }
         
-//        setData(titles: films)
+        //        setData(titles: films)
         
         func getData(url: URL) {
             //GET request
@@ -48,20 +49,18 @@ class DetailsViewController: UIViewController {
             
             let task = URLSession.shared.dataTask(with: request) {
                 data, response, error in
-                DispatchQueue.main.async {
-
-                }
                 if let data = data {
                     let decoder = JSONDecoder()
                     do {
                         let parsedData = try? decoder.decode(Film.self, from: data)
                         DispatchQueue.main.async {
-                            self.filmsLabel.text! += "\n" + (parsedData!.title!)
-                            DispatchQueue.main.async {
-                                self.myActivityIndicator.stopAnimating()
-                                self.myActivityIndicator.isHidden = true
-                            }
-                            
+                            self.filmsLabel.text! += ("\n" + parsedData!.title!)
+                            //                            self.titles.append(parsedData!.title!)
+                        }
+                        //                        self.setData(titles: self.titles)
+                        DispatchQueue.main.async {
+                            self.myActivityIndicator.stopAnimating()
+                            self.myActivityIndicator.isHidden = true
                         }
                     }
                     catch {
@@ -75,11 +74,16 @@ class DetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func setData(titles: [String]) {
-        for i in titles {
-            self.filmsLabel.text! += ("\n" + i)
-        }
-    }
+    //    func setData(titles: [String]) {
+    //        DispatchQueue.main.async {
+    //            if titles.count == 0 {
+    //                self.filmsLabel.text! = "None"
+    //            }
+    //            self.filmsLabel.text! = titles.joined(separator: "\n")
+    //            self.filmsLabel.numberOfLines = titles.count + 1
+    //            self.filmsLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+    //        }
+    //    }
     /*
      // MARK: - Navigation
      
