@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillProportionally" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="d0U-Vt-fPN">
-                                                    <rect key="frame" x="7" y="11" width="195.33333333333334" height="84.333333333333329"/>
+                                                    <rect key="frame" x="20" y="11" width="195.33333333333334" height="84.333333333333329"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TF6-XN-HcZ">
                                                             <rect key="frame" x="0.0" y="0.0" width="145.33333333333334" height="20.333333333333332"/>
@@ -119,7 +119,7 @@
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kgf-Q2-C3V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="VUw-2k-MjH"/>
                             <constraint firstItem="kgf-Q2-C3V" firstAttribute="trailing" secondItem="weJ-kQ-yzW" secondAttribute="trailing" id="r3N-Zi-WZj"/>
@@ -255,7 +255,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OWc-g4-wvi"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="1K1-pM-ZP0" firstAttribute="top" secondItem="fXX-s5-GF7" secondAttribute="topMargin" constant="34" id="1I3-Fa-vy2"/>
                             <constraint firstItem="1K1-pM-ZP0" firstAttribute="leading" secondItem="OWc-g4-wvi" secondAttribute="leading" constant="46" id="OZr-Xh-KYl"/>
