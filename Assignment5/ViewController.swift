@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let decoder = JSONDecoder()
                 do {
                     let parsedData = try? decoder.decode(Homeworld.self, from: data)
-                    self.homeworld.append((parsedData!.url!, parsedData!.name ?? "none"))
+                    self.homeworld.append((parsedData!.url! ?? "none", parsedData!.name ?? "none"))
                     
                     //To wait for filling data to array
                     if self.homeworld.count % 10 == 0 {
