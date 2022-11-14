@@ -8,7 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var myTableView: UITableView!
     
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
@@ -16,11 +18,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var urls = [String]()
     var homeworld = [(String, String)]()
     var nextUrl : String?
-    var isPaginating = false
-    var isDonePaginating = false
+    var previousUrl : String?
+    var count = 1
+    //    var isPaginating = false
+    //    var isDonePaginating = false
     
     override func viewDidLoad() {
-        myActivityIndicator.startAnimating()
+        myActivityIndicator.hidesWhenStopped = true
         
         super.viewDidLoad()
         
@@ -35,17 +39,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func getData(url: URL) {
+        self.myActivityIndicator.startAnimating()
         //GET request
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
+            //            if let error != nil {
+            //
+            //            }
             if let data = data {
                 let decoder = JSONDecoder()
                 do {
                     let parsedData = try? decoder.decode(Starwar.self, from: data)
-                    self.people += parsedData!.results!
+                    self.people = parsedData!.results!
                     self.nextUrl = parsedData!.next ?? ""
+                    self.previousUrl = parsedData!.previous ?? ""
                     
                     for i in self.people {
                         self.urls.append(i.homeworld!)
@@ -75,14 +84,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let decoder = JSONDecoder()
                 do {
                     let parsedData = try? decoder.decode(Homeworld.self, from: data)
-                    self.homeworld.append((parsedData!.url! ?? "none", parsedData!.name ?? "none"))
+                    self.homeworld.append((parsedData?.url ?? "none", parsedData?.name ?? "none"))
                     
                     //To wait for filling data to array
                     if self.homeworld.count % 10 == 0 {
                         DispatchQueue.main.async {
                             self.myTableView.reloadData()
                         }
-                        self.isPaginating = false
+                        //                        self.isPaginating = false
                     }
                 }
                 catch {
@@ -108,7 +117,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     detailsVC.homeworld = place
                 }
             }
-            
         }
     }
     
@@ -128,34 +136,66 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cell.homeWorldLabel.text = place
             }
         }
+        myActivityIndicator.stopAnimating()
         
-        //initiate paginiation
-        if indexPath.item == people.count - 1 && !isPaginating{
-            isPaginating = true
-            myActivityIndicator.isHidden = false
-            myActivityIndicator.startAnimating()
-            if people.count == 0 {
-                self.isDonePaginating = true
-            }
-            getData(url: URL(string: nextUrl!)!)
-            
-        }
-        else {
-            myActivityIndicator.stopAnimating()
-            myActivityIndicator.isHidden = true
-        }
+        //initiate automatic paginiation when swipe
+        //        if indexPath.item == people.count - 1 && !isPaginating{
+        //            isPaginating = true
+        //            myActivityIndicator.isHidden = false
+        //            myActivityIndicator.startAnimating()
+        //            if people.count == 0 {
+        //                self.isDonePaginating = true
+        //            }
+        //            getData(url: URL(string: nextUrl!)!)
+        
+        //        }
+        //        else {
+        //            myActivityIndicator.stopAnimating()
+        //            myActivityIndicator.isHidden = true
+        //        }
         //        self.isPaginating = false
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height : CGFloat = isDonePaginating ? 0 : 90
-        return height
+        //        let height : CGFloat = isDonePaginating ? 0 : 90
+        return 90
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //            self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath.row)
+        //            self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath)
     }
+    
+    @IBAction func nextActionTapped(_ sender: Any) {
+        count = count + 1
+        if nextUrl != "" {
+            getData(url: URL(string: nextUrl!)!)
+        }
+        else {
+            let alert = UIAlertController(title: "Attention", message: "There is no more next page.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default) { (action) in
+                self.dismiss(animated: true)
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    @IBAction func previousActionTapped(_ sender: Any) {
+        count = count - 1
+        if previousUrl != "" {
+            getData(url: URL(string: previousUrl!)!)
+        }
+        else {
+            let alert = UIAlertController(title: "Attention", message: "There is no more previous page.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default) { (action) in
+                self.dismiss(animated: true)
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
 }
 
 

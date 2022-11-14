@@ -117,6 +117,24 @@
                                 <rect key="frame" x="16" y="753" width="361" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFh-Pz-wal">
+                                <rect key="frame" x="16" y="762" width="123" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="&lt;- Prev Page"/>
+                                <connections>
+                                    <action selector="previousActionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vx2-0W-VeJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCN-J0-jtz">
+                                <rect key="frame" x="252" y="762" width="125" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Next Page -&gt;"/>
+                                <connections>
+                                    <action selector="nextActionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eIW-9u-K5g"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -131,6 +149,8 @@
                     <connections>
                         <outlet property="myActivityIndicator" destination="weJ-kQ-yzW" id="Vrn-jY-9X4"/>
                         <outlet property="myTableView" destination="kgf-Q2-C3V" id="iGg-Jn-iAt"/>
+                        <outlet property="nextButton" destination="mCN-J0-jtz" id="4PQ-gG-rJf"/>
+                        <outlet property="previousButton" destination="KFh-Pz-wal" id="av4-ag-jYx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -279,6 +299,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0p4-3L-kpf">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KaU-cL-285" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4G4-KN-EnH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="q60-78-wBQ">
@@ -290,7 +311,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eWO-xM-UnR"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KaU-cL-285" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="982.44274809160299" y="-2.1126760563380285"/>
         </scene>
