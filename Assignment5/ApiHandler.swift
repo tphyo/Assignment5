@@ -1,12 +1,13 @@
-//
+
 //  ApiHandler.swift
 //  Assignment5
 //
 //  Created by Thet Hlaing Phyo on 11/14/22.
 //
 // ApiHandler code doesn't work
-//import Foundation
 
+//import Foundation
+//
 //class ApiHandler {
 //
 //    var object = ViewController()
@@ -22,18 +23,18 @@
 //            if let data = data {
 //                let decoder = JSONDecoder()
 //                do {
-//                        let parsedData = try? decoder.decode(Starwar.self, from: data)
-//                        self.object.people = parsedData!.results!
-//                        self.object.nextUrl = parsedData!.next ?? ""
-//                        self.object.previousUrl = parsedData!.previous ?? ""
+//                    let parsedData = try? decoder.decode(Starwar.self, from: data)
+//                    self.object.people = parsedData!.results!
+//                    self.object.nextUrl = parsedData!.next ?? ""
+//                    self.object.previousUrl = parsedData!.previous ?? ""
 //
-//                        for i in self.object.people {
-//                            self.object.urls.append(i.homeworld!)
-//                        }
+//                    for i in self.object.people {
+//                        self.object.urls.append(i.homeworld!)
+//                    }
 //
-//                        for j in self.object.urls {
-//                            self.getHomeworldName(url: URL(string: j)!)
-//                        }
+//                    for j in self.object.urls {
+//                        self.getHomeworldName(url: URL(string: j)!)
+//                    }
 //                }
 //                catch {
 //                    print(error.localizedDescription)
@@ -44,7 +45,7 @@
 //
 //    }
 //
-//    func getHomeworldName(url: URL) {
+//    public func getHomeworldName(url: URL) {
 //        //GET request
 //        var request = URLRequest(url: url)
 //        request.httpMethod = "GET"
@@ -54,8 +55,8 @@
 //            if let data = data {
 //                let decoder = JSONDecoder()
 //                do {
-//                        let parsedData = try? decoder.decode(Homeworld.self, from: data)
-//                        self.object.homeworld.append((parsedData?.url ?? "none", parsedData?.name ?? "none"))
+//                    let parsedData = try? decoder.decode(Homeworld.self, from: data)
+//                    self.object.homeworld.append((parsedData?.url ?? "none", parsedData?.name ?? "none"))
 //
 //                    //To wait for filling data to array
 //                    if self.object.homeworld.count % 10 == 0 {
@@ -102,46 +103,44 @@
 //        task.resume()
 //
 //    }
-    
-    //    func getData(url: URL, model: String) -> AnyObject {
-    //        //GET request
-    //        var request = URLRequest(url: url)
-    //
-    //        request.httpMethod = "GET"
-    //        var parsedData : AnyObject?
-    //        let task = URLSession.shared.dataTask(with: request) {
-    //            data, response, error in
-    //            if let data = data {
-    //                let decoder = JSONDecoder()
-    //                do
-    //                {
-    //                    if model == "Homeworld"
-    //                    {
-    //                        parsedData = try? decoder.decode(Homeworld.self, from: data) as AnyObject
-    //                    }
-    //                    else if model == "Starwar"
-    //                    {
-    //                        parsedData = try? decoder.decode(Starwar.self, from: data) as AnyObject
-    //                    }
-    //                    else if model == "Result"
-    //                    {
-    //                        parsedData = try? decoder.decode(Result.self, from: data) as AnyObject
-    //                    }
-    //                    else if model == "Film"
-    //                    {
-    //                        parsedData = try? decoder.decode(Film.self, from: data) as AnyObject
-    //                    }
-    //                }
-    //                catch {
-    //                    print(error.localizedDescription)
-    //                }
-    //            }
-    //        }
-    //        task.resume()
-    //        return parsedData!
-    //
-    //    }
-    // Do any additional setup after loading the view.
+//
+//    func getDataGeneric(url: URL, model: String) -> AnyObject {
+//        //GET request
+//        var request = URLRequest(url: url)
+//
+//        request.httpMethod = "GET"
+//        var parsedData : AnyObject?
+//        let task = URLSession.shared.dataTask(with: request) {
+//            data, response, error in
+//            if let data = data {
+//                let decoder = JSONDecoder()
+//                do
+//                {
+//                    if model == "Homeworld"
+//                    {
+//                        parsedData = try? decoder.decode(Homeworld.self, from: data) as AnyObject
+//                    }
+//                    else if model == "Starwar"
+//                    {
+//                        parsedData = try? decoder.decode(Starwar.self, from: data) as AnyObject
+//                    }
+//                    else if model == "Result"
+//                    {
+//                        parsedData = try? decoder.decode(Result.self, from: data) as AnyObject
+//                    }
+//                    else if model == "Film"
+//                    {
+//                        parsedData = try? decoder.decode(Film.self, from: data) as AnyObject
+//                    }
+//                }
+//                catch {
+//                    print(error.localizedDescription)
+//                }
+//            }
+//        }
+//        task.resume()
+//        return parsedData!
+//    }
 //}
 
 

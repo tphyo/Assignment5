@@ -14,8 +14,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var hairColorLabel: UILabel!
     @IBOutlet weak var eyeColorLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
+    
     var filmsURL = [String]()
     var films = [String]()
     var name : String = ""
@@ -34,14 +34,11 @@ class DetailsViewController: UIViewController {
         hairColorLabel.text = hairColor
         eyeColorLabel.text = eyeColor
         homeworldLabel.text = homeworld
-//        let api = ApiHandler()
         for i in filmsURL {
             let url = URL(string: i)
             getDetailsData(url: url!)
         }
-        
-        //        setData(titles: films)
-}
+    }
     
     func getDetailsData(url: URL) {
         //GET request
@@ -74,14 +71,14 @@ class DetailsViewController: UIViewController {
     }
     // Do any additional setup after loading the view.
 }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destination.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
 

@@ -9,10 +9,10 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var nextButton: UIButton!
-    
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
+    
     var people = [Result]()
     var urls = [String]()
     var homeworld = [(String, String)]()
@@ -29,7 +29,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.dataSource = self
         
         let url = URL(string: "https://swapi.dev/api/people/")
-//        let api = ApiHandler()
         getData(url: url!)
     }
     
