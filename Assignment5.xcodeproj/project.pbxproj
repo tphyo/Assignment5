@@ -69,7 +69,6 @@
 				A34EEECA2922F3FD005C9BF4 /* Views */,
 				A34EEECB2922F47D005C9BF4 /* Controllers */,
 				A34B7954291DC6D900C45EA5 /* Assets.xcassets */,
-				A34B7956291DC6D900C45EA5 /* LaunchScreen.storyboard */,
 				A34B7959291DC6D900C45EA5 /* Info.plist */,
 				A354850A29236160009C80B8 /* ApiHandler.swift */,
 			);
@@ -87,6 +86,7 @@
 		A34EEECA2922F3FD005C9BF4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A34B7956291DC6D900C45EA5 /* LaunchScreen.storyboard */,
 				A34B7951291DC6D700C45EA5 /* Main.storyboard */,
 				A34B7965291DE48400C45EA5 /* MyTableViewCell.swift */,
 			);
