@@ -117,29 +117,32 @@
                                 <rect key="frame" x="16" y="753" width="361" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFh-Pz-wal">
-                                <rect key="frame" x="16" y="762" width="123" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCN-J0-jtz">
+                                <rect key="frame" x="295.33333333333331" y="763" width="81.666666666666686" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="&lt;- Prev Page"/>
-                                <connections>
-                                    <action selector="previousActionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vx2-0W-VeJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCN-J0-jtz">
-                                <rect key="frame" x="252" y="762" width="125" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Next Page -&gt;"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Next -&gt;"/>
                                 <connections>
                                     <action selector="nextActionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eIW-9u-K5g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFh-Pz-wal">
+                                <rect key="frame" x="16" y="763" width="80.333333333333329" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="&lt;- Prev"/>
+                                <connections>
+                                    <action selector="previousActionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vx2-0W-VeJ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="KFh-Pz-wal" firstAttribute="top" secondItem="kgf-Q2-C3V" secondAttribute="bottom" constant="10" id="0f3-cP-Opt"/>
+                            <constraint firstItem="mCN-J0-jtz" firstAttribute="top" secondItem="kgf-Q2-C3V" secondAttribute="bottom" constant="10" id="6hQ-0D-rcY"/>
+                            <constraint firstItem="KFh-Pz-wal" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Npi-Az-xYh"/>
                             <constraint firstItem="kgf-Q2-C3V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="VUw-2k-MjH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mCN-J0-jtz" secondAttribute="trailing" constant="16" id="jDv-iK-HR6"/>
+                            <constraint firstItem="mCN-J0-jtz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KFh-Pz-wal" secondAttribute="trailing" constant="8" symbolic="YES" id="msp-L7-ebB"/>
                             <constraint firstItem="kgf-Q2-C3V" firstAttribute="trailing" secondItem="weJ-kQ-yzW" secondAttribute="trailing" id="r3N-Zi-WZj"/>
                             <constraint firstItem="weJ-kQ-yzW" firstAttribute="top" secondItem="kgf-Q2-C3V" secondAttribute="bottom" id="vou-HL-f4x"/>
                             <constraint firstItem="kgf-Q2-C3V" firstAttribute="leading" secondItem="weJ-kQ-yzW" secondAttribute="leading" id="zEr-0h-ZJz"/>

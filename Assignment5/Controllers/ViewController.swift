@@ -12,29 +12,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var myTableView: UITableView!
-    
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
     var people = [Result]()
     var urls = [String]()
     var homeworld = [(String, String)]()
     var nextUrl : String?
     var previousUrl : String?
-    var count = 1
     //    var isPaginating = false
     //    var isDonePaginating = false
     
     override func viewDidLoad() {
         myActivityIndicator.hidesWhenStopped = true
-        
         super.viewDidLoad()
         
         myTableView.delegate = self
         myTableView.dataSource = self
         
         let url = URL(string: "https://swapi.dev/api/people/")
-        
         getData(url: url!)
-        
     }
     
     
@@ -45,24 +40,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
-            //            if let error != nil {
-            //
-            //            }
             if let data = data {
                 let decoder = JSONDecoder()
                 do {
-                    let parsedData = try? decoder.decode(Starwar.self, from: data)
-                    self.people = parsedData!.results!
-                    self.nextUrl = parsedData!.next ?? ""
-                    self.previousUrl = parsedData!.previous ?? ""
-                    
-                    for i in self.people {
-                        self.urls.append(i.homeworld!)
-                    }
-                    
-                    for j in self.urls {
-                        self.getHomeworldName(url: URL(string: j)!)
-                    }
+                        let parsedData = try? decoder.decode(Starwar.self, from: data)
+                        self.people = parsedData!.results!
+                        self.nextUrl = parsedData!.next ?? ""
+                        self.previousUrl = parsedData!.previous ?? ""
+                        
+                        for i in self.people {
+                            self.urls.append(i.homeworld!)
+                        }
+                        
+                        for j in self.urls {
+                            self.getHomeworldName(url: URL(string: j)!)
+                        }
                 }
                 catch {
                     print(error.localizedDescription)
@@ -138,7 +130,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         myActivityIndicator.stopAnimating()
         
-        //initiate automatic paginiation when swipe
+        //initiate automatic paginiation when swipe to end of table
         //        if indexPath.item == people.count - 1 && !isPaginating{
         //            isPaginating = true
         //            myActivityIndicator.isHidden = false
@@ -162,12 +154,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 90
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //            self.performSegue(withIdentifier: "ShowDetailsVC", sender: indexPath)
-    }
-    
     @IBAction func nextActionTapped(_ sender: Any) {
-        count = count + 1
         if nextUrl != "" {
             getData(url: URL(string: nextUrl!)!)
         }
@@ -181,8 +168,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
     }
+    
     @IBAction func previousActionTapped(_ sender: Any) {
-        count = count - 1
         if previousUrl != "" {
             getData(url: URL(string: previousUrl!)!)
         }

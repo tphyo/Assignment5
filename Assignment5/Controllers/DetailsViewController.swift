@@ -73,17 +73,7 @@ class DetailsViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
-    
-    //    func setData(titles: [String]) {
-    //        DispatchQueue.main.async {
-    //            if titles.count == 0 {
-    //                self.filmsLabel.text! = "None"
-    //            }
-    //            self.filmsLabel.text! = titles.joined(separator: "\n")
-    //            self.filmsLabel.numberOfLines = titles.count + 1
-    //            self.filmsLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-    //        }
-    //    }
+}
     /*
      // MARK: - Navigation
      
@@ -94,4 +84,4 @@ class DetailsViewController: UIViewController {
      }
      */
     
-}
+
