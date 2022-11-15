@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.delegate = self
         myTableView.dataSource = self
         
-        let url = URL(string: "https://swapi.dev/api/people/")
+        let url = URL(string: "https://swapi.py4e.com/api/people/")
         getData(url: url!)
     }
     
