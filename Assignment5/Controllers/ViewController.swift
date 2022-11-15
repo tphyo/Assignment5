@@ -29,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.dataSource = self
         
         let url = URL(string: "https://swapi.dev/api/people/")
+//        let api = ApiHandler()
         getData(url: url!)
     }
     

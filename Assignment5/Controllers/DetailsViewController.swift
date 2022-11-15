@@ -34,45 +34,45 @@ class DetailsViewController: UIViewController {
         hairColorLabel.text = hairColor
         eyeColorLabel.text = eyeColor
         homeworldLabel.text = homeworld
-        
+//        let api = ApiHandler()
         for i in filmsURL {
             let url = URL(string: i)
-            getData(url: url!)
+            getDetailsData(url: url!)
         }
         
         //        setData(titles: films)
+}
+    
+    func getDetailsData(url: URL) {
+        //GET request
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
-        func getData(url: URL) {
-            //GET request
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            
-            let task = URLSession.shared.dataTask(with: request) {
-                data, response, error in
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let parsedData = try? decoder.decode(Film.self, from: data)
-                        DispatchQueue.main.async {
-                            self.filmsLabel.text! += ("\n" + parsedData!.title!)
-                            //                            self.titles.append(parsedData!.title!)
-                        }
-                        //                        self.setData(titles: self.titles)
-                        DispatchQueue.main.async {
-                            self.myActivityIndicator.stopAnimating()
-                            self.myActivityIndicator.isHidden = true
-                        }
+        let task = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let parsedData = try? decoder.decode(Film.self, from: data)
+                    DispatchQueue.main.async {
+                        self.filmsLabel.text! += ("\n" + parsedData!.title!)
+                        //                            self.titles.append(parsedData!.title!)
                     }
-                    catch {
-                        print(error.localizedDescription)
+                    //                        self.setData(titles: self.titles)
+                    DispatchQueue.main.async {
+                        self.myActivityIndicator.stopAnimating()
+                        self.myActivityIndicator.isHidden = true
                     }
                 }
+                catch {
+                    print(error.localizedDescription)
+                }
             }
-            task.resume()
-            
         }
-        // Do any additional setup after loading the view.
+        task.resume()
+        
     }
+    // Do any additional setup after loading the view.
 }
     /*
      // MARK: - Navigation

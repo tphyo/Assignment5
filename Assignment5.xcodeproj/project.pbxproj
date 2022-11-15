@@ -16,6 +16,7 @@
 		A34B7960291DC86500C45EA5 /* Starwar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B795F291DC86500C45EA5 /* Starwar.swift */; };
 		A34B7966291DE48400C45EA5 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B7965291DE48400C45EA5 /* MyTableViewCell.swift */; };
 		A34B79AA291EF18A00C45EA5 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B79A9291EF18A00C45EA5 /* DetailsViewController.swift */; };
+		A354850B29236160009C80B8 /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354850A29236160009C80B8 /* ApiHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A34B795F291DC86500C45EA5 /* Starwar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starwar.swift; sourceTree = "<group>"; };
 		A34B7965291DE48400C45EA5 /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		A34B79A9291EF18A00C45EA5 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		A354850A29236160009C80B8 /* ApiHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				A34B7954291DC6D900C45EA5 /* Assets.xcassets */,
 				A34B7956291DC6D900C45EA5 /* LaunchScreen.storyboard */,
 				A34B7959291DC6D900C45EA5 /* Info.plist */,
+				A354850A29236160009C80B8 /* ApiHandler.swift */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				A34B7950291DC6D700C45EA5 /* ViewController.swift in Sources */,
 				A34B794C291DC6D700C45EA5 /* AppDelegate.swift in Sources */,
 				A34B79AA291EF18A00C45EA5 /* DetailsViewController.swift in Sources */,
+				A354850B29236160009C80B8 /* ApiHandler.swift in Sources */,
 				A34B7966291DE48400C45EA5 /* MyTableViewCell.swift in Sources */,
 				A34B794E291DC6D700C45EA5 /* SceneDelegate.swift in Sources */,
 			);
