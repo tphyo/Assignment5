@@ -1,3 +1,3 @@
 # Assignment5
 
-Just run the apps, it will run. Might need to wait a few moment to load the data.
+StarWar Characters Loader from public starwar api call. Display name, eye color, hair color, homeworld and if you click on it, it will show details page with the films that those characters act in. Also setup pagination with previous and next button to go through all the characters available on server. Multiple api call is implemented to display homeworld name and films name. 
